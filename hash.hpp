@@ -5,7 +5,11 @@
 #include <cstring>
 #include <iostream>
 #include <sstream>
+#if defined(_WIN32)
+#include "SHA256.h"
+#else
 #include <openssl/sha.h>
+#endif
 
 std::string to_hex(unsigned char s) {
     std::stringstream ss;
@@ -20,7 +24,11 @@ std::string to_hex(unsigned char s) {
 }  
 
 std::string hashString(const std::string& stringForHashing) {
-    
+#ifdef _WIN32
+	std::string output;
+	output = sha256(stringForHashing);
+	return output;
+#else
     unsigned char hash[SHA256_DIGEST_LENGTH];
     SHA256_CTX sha256;
     SHA256_Init(&sha256);
@@ -32,6 +40,8 @@ std::string hashString(const std::string& stringForHashing) {
         output += to_hex(hash[i]);
     }    
     return output;
+#endif
+
 }
 
 #endif
