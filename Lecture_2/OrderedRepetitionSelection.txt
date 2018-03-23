@@ -1,0 +1,13 @@
+void combinationsRO(vector<T>& soFar,
+                    vector<T>& remaining,
+                    int R) {
+    if (soFar.size() == R) {
+        printList(soFar);
+    } else {
+        for (T element : remaining) {
+            soFar.push_back(element);
+            combinationsRO(soFar,remaining,R);
+            soFar.pop_back();
+        }
+    }
+}

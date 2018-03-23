@@ -1,0 +1,14 @@
+void permutations(vector<T>& soFar,
+                  vector<T>& remaining) {
+    if (remaining.empty()) {
+        printList(soFar);
+    } else {
+        for (int i = 0 ; i < remaining.size() ; i++) {
+            soFar.push_back(remaining[i]);
+            vector<T> remainingWithoutI(remaining);
+            removeElementFromList(remainingWithoutI,i);
+            permutations(soFar,remainingWithoutI);
+            soFar.pop_back();
+        }
+    }
+}

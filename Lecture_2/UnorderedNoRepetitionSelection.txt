@@ -1,0 +1,15 @@
+void combinationsNRNO(vector<T>& soFar,
+                      vector<T>& remaining,
+                      int R) {
+    if (soFar.size() == R) {
+        printList(soFar);
+    } else {  
+        while(!remaining.empty()) {
+            soFar.push_back(remaining.back());
+            remaining.pop_back();	
+            vector<T> newRemaining(remaining);
+            combinationsNRNO(soFar, newRemaining, R);
+            soFar.pop_back();
+        }	
+    }	
+}

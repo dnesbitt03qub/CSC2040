@@ -1,0 +1,15 @@
+void combinationsNR(vector<T>& soFar,  
+                    vector<T>& remaining,
+                    int R) {
+    if (soFar.size() == R) {
+        printList(soFar);
+    } else {
+        for (int i = 0 ; i < remaining.size() ; i++) {
+            soFar.push_back(remaining[i]);
+            vector<T> remainingWithoutI(remaining);
+            removeElementFromList(remainingWithoutI,i);
+            combinationsNR(soFar,remainingWithoutI,R);
+            soFar.pop_back();
+        }
+    }
+}
